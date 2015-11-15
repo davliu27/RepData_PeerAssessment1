@@ -17,6 +17,7 @@ data$interval<-as.numeric(data$interval)
 data$date<-as.Date(data$date)
 ```
 What is mean total number of steps taken per day?
+1.Calculate the total number of steps taken per day
 
 ```r
 #Calculate the total number of steps taken per day
@@ -25,7 +26,7 @@ data2<-data[good,]
 library(plyr)
 steps_per_day<-ddply(data2,.(date),summarize,steps=sum(steps))
 ```
-Make a histogram of the total number of steps taken each day
+2.Make a histogram of the total number of steps taken each day
 
 ```r
 hist(steps_per_day$steps)
@@ -33,7 +34,7 @@ hist(steps_per_day$steps)
 
 ![plot of chunk histogram](figure/histogram-1.png) 
 
-Calculate and report the mean and median of the total number of steps taken per day
+3.Calculate and report the mean and median of the total number of steps taken per day
 
 ```r
 mean(steps_per_day$steps)
@@ -49,5 +50,26 @@ median(steps_per_day$steps)
 
 ```
 ## [1] 10765
+```
+
+What is the average daily activity pattern?
+1.Make a time series plot
+
+```r
+interval<-ddply(data2,.(interval),summarize,steps=mean(steps))
+plot(interval$interval,interval$steps)
+lines(interval$interval,interval$steps)
+```
+
+![plot of chunk timeseries_plot](figure/timeseries_plot-1.png) 
+
+2.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+
+```r
+interval$interval[which.max(interval$steps)]
+```
+
+```
+## [1] 835
 ```
 
