@@ -283,6 +283,9 @@ length(missing_values[missing_values==TRUE])
 
 <pre><code class="r">#filling missing values with the mean of that day
 steps_per_day_mean2&lt;-ddply(data,.(date),summarize,steps=mean(steps))
+for(i in 1:length(steps_per_day$date)){
+  data3[is.na(data3[data3$date==steps_per_day_mean$date[i],1]),1]&lt;-steps_per_day_mean[i,2]
+  }
 </code></pre>
 
 </body>
