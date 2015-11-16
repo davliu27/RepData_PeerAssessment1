@@ -73,3 +73,22 @@ interval$interval[which.max(interval$steps)]
 ## [1] 835
 ```
 
+Imputing missing values
+
+1.Calculate and report the total number of missing values in the dataset
+
+```r
+missing_values<-is.na(data$steps)
+length(missing_values[missing_values==TRUE])
+```
+
+```
+## [1] 2304
+```
+
+2.Devise a strategy for filling in all of the missing values in the dataset.
+
+```r
+#filling missing values with the mean of that day
+steps_per_day_mean2<-ddply(data,.(date),summarize,steps=mean(steps))
+```

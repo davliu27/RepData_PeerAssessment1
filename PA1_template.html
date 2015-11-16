@@ -268,6 +268,23 @@ lines(interval$interval,interval$steps)
 <pre><code>## [1] 835
 </code></pre>
 
+<p>Imputing missing values</p>
+
+<p>1.Calculate and report the total number of missing values in the dataset</p>
+
+<pre><code class="r">missing_values&lt;-is.na(data$steps)
+length(missing_values[missing_values==TRUE])
+</code></pre>
+
+<pre><code>## [1] 2304
+</code></pre>
+
+<p>2.Devise a strategy for filling in all of the missing values in the dataset.</p>
+
+<pre><code class="r">#filling missing values with the mean of that day
+steps_per_day_mean2&lt;-ddply(data,.(date),summarize,steps=mean(steps))
+</code></pre>
+
 </body>
 
 </html>
